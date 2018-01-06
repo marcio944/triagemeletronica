@@ -10,5 +10,5 @@ package triagem;
  * @author ESDRAS
  */
 public class teste {
-    public int i; 
+    public int i=1; 
 }
