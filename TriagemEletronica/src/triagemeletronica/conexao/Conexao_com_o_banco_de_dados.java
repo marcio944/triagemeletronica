@@ -13,6 +13,8 @@ import java.sql.SQLException;
  *
  * @author Fabricio Sousa
  */
+
+// testando repositório na class de conexão com banco de dados
 public class Conexao_com_o_banco_de_dados {
     
     public static Connection getConnection(){
