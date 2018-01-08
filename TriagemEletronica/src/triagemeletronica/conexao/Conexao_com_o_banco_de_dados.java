@@ -16,7 +16,10 @@ import java.sql.SQLException;
 
 // testando repositório na class de conexão com banco de dados
 
- // Bruno executa teste do repositorio!
+ // Bruno executa teste do repositorio! 
+
+
+// Diego testando repositório 
 public class Conexao_com_o_banco_de_dados {
     
     public static Connection getConnection(){
