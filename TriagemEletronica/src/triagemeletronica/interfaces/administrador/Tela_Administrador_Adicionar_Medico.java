@@ -35,8 +35,8 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
         conexao = Conexao.getConnection();
     }
     
-    private void adicionar_usuario(){
-        String sql = "insert into usuarios(nome,login,senha,perfil) values (?,?,?,?)";
+   public void adicionar_usuario(){
+        String sql = "insert into usuarios(id,nome,login,senha,perfil) values (?,?,?,?)";
 
         try {
             pst = conexao.prepareStatement(sql);
