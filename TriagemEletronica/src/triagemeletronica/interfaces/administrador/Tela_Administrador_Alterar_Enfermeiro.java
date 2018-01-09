@@ -31,7 +31,7 @@ public class Tela_Administrador_Alterar_Enfermeiro extends javax.swing.JInternal
      */
     public Tela_Administrador_Alterar_Enfermeiro() {
         initComponents();
-        conexao = Conexao_com_o_banco_de_dados.getConnection();
+        conexao = Conexao.getConnection();
     }
         
         private void alterar_endereco(){
