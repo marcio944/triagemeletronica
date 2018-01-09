@@ -20,7 +20,7 @@ import java.sql.SQLException;
 
 
 // Diego testando repositório 
-public class Conexao_com_o_banco_de_dados {
+public class Conexao {
     
     public static Connection getConnection(){
         

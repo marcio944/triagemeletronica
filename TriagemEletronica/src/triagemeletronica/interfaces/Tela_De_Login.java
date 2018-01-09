@@ -5,7 +5,7 @@
  */
 package triagemeletronica.interfaces;
 
-import triagemeletronica.conexao.Conexao_com_o_banco_de_dados;
+import triagemeletronica.conexao.Conexao;
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,7 +25,7 @@ public class Tela_De_Login extends javax.swing.JFrame {
     
     public Tela_De_Login() {
         initComponents();
-        conexao = Conexao_com_o_banco_de_dados.getConnection();
+        conexao = Conexao.getConnection();
     }
 
     public void autenticacao() {

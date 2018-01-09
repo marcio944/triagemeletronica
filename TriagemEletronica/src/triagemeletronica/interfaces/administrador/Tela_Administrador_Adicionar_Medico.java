@@ -5,7 +5,7 @@
  */
 package triagemeletronica.interfaces.administrador;
 
-import triagemeletronica.conexao.Conexao_com_o_banco_de_dados;
+import triagemeletronica.conexao.Conexao;
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -32,7 +32,7 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
      */
     public Tela_Administrador_Adicionar_Medico() {
         initComponents();
-        conexao = Conexao_com_o_banco_de_dados.getConnection();
+        conexao = Conexao.getConnection();
     }
     
     private void adicionar_usuario(){
