@@ -24,7 +24,7 @@ public class Conexao {
     
     public static Connection getConnection(){
         
-        String db_url = "jdbc:mysql://mysql.hostinger.com.br/u398451462_tgm";
+        String db_url = "jdbc:mysql://localhost:3306/triagem";
         
         Connection con = null;
         
@@ -32,7 +32,7 @@ public class Conexao {
             
             Class.forName("com.mysql.jdbc.Driver");
             
-            con=DriverManager.getConnection(db_url,"u398451462_tgm","tgm@2018");
+            con=DriverManager.getConnection(db_url,"root","");
             
         }catch (ClassNotFoundException ex){
             System.out.println("Driver do MYSQL não Encontrado");
