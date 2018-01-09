@@ -40,7 +40,6 @@ public class Tela_Sobre extends javax.swing.JFrame {
         setBackground(new java.awt.Color(0, 0, 0));
         setFocusable(false);
         setForeground(new java.awt.Color(0, 0, 0));
-        setPreferredSize(new java.awt.Dimension(8000, 295));
 
         jp.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -135,6 +134,8 @@ public class Tela_Sobre extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Tela_Sobre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
