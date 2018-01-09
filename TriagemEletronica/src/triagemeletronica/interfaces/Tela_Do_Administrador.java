@@ -9,6 +9,12 @@ import java.text.DateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import triagemeletronica.interfaces.Tela_Sobre;
+import triagemeletronica.interfaces.administrador.Tela_Administrador_Adicionar_Enfermeiro;
+import triagemeletronica.interfaces.administrador.Tela_Administrador_Adicionar_Medico;
+import triagemeletronica.interfaces.administrador.Tela_Administrador_Alterar_Enfermeiro;
+import triagemeletronica.interfaces.administrador.Tela_Administrador_Alterar_Medico;
+import triagemeletronica.interfaces.administrador.Tela_Administrador_Deletar_Enfermeiro;
+import triagemeletronica.interfaces.administrador.Tela_Administrador_Deletar_Medico;
 //import triagemeletronica.interfaces.administrador.Tela_Administrador_Adicionar_Enfermeiro;
 //import triagemeletronica.interfaces.administrador.Tela_Administrador_Adicionar_Medico;
 
@@ -260,37 +266,37 @@ public class Tela_Do_Administrador extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-//       Tela_Administrador_Alterar_Medico tam = new Tela_Administrador_Alterar_Medico();
- //      tam.setVisible(true);
-//       Desktop.add(tam);
+       Tela_Administrador_Alterar_Medico tam = new Tela_Administrador_Alterar_Medico();
+       tam.setVisible(true);
+       Desktop.add(tam);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-  /*     Tela_Administrador_Adicionar_Enfermeiro taf = new Tela_Administrador_Adicionar_Enfermeiro();
+       Tela_Administrador_Adicionar_Enfermeiro taf = new Tela_Administrador_Adicionar_Enfermeiro();
        taf.setVisible(true);
-       Desktop.add(taf);*/
+       Desktop.add(taf);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-  /*     Tela_Administrador_Adicionar_Medico tam = new Tela_Administrador_Adicionar_Medico();
+      Tela_Administrador_Adicionar_Medico tam = new Tela_Administrador_Adicionar_Medico();
        tam.setVisible(true);
-       Desktop.add(tam); */
+       Desktop.add(tam); 
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-//       Tela_Administrador_Alterar_Enfermeiro taf = new Tela_Administrador_Alterar_Enfermeiro();
- //      taf.setVisible(true);
- //      Desktop.add(taf);
+       Tela_Administrador_Alterar_Enfermeiro taf = new Tela_Administrador_Alterar_Enfermeiro();
+      taf.setVisible(true);
+       Desktop.add(taf);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
- //      Tela_Administrador_Deletar_Medico tdm = new Tela_Administrador_Deletar_Medico();
- //      tdm.setVisible(true);
- //      Desktop.add(tdm);
+       Tela_Administrador_Deletar_Medico tdm = new Tela_Administrador_Deletar_Medico();
+       tdm.setVisible(true);
+       Desktop.add(tdm);
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-/*       Tela_Administrador_Deletar_Enfermeiro tdf = new Tela_Administrador_Deletar_Enfermeiro();
+       Tela_Administrador_Deletar_Enfermeiro tdf = new Tela_Administrador_Deletar_Enfermeiro();
        tdf.setVisible(true);
        Desktop.add(tdf);        // TODO add your handling code here: */
     }//GEN-LAST:event_jMenuItem8ActionPerformed

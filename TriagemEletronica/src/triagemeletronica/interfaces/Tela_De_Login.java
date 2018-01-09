@@ -45,12 +45,12 @@ public class Tela_De_Login extends javax.swing.JFrame {
                 String perfil = rs.getString(5);
                 
                 if(perfil.equalsIgnoreCase("Administrador")){
-//                    Tela_Do_Administrador ta = new Tela_Do_Administrador();
-  //                  ta.setVisible(true);
-    //                this.dispose();
+                   Tela_Do_Administrador ta = new Tela_Do_Administrador();
+                    ta.setVisible(true);
+                    this.dispose();
                 
-       //             Tela_Do_Administrador.lblUsuario.setText(rs.getString(2));
-      //              Tela_Do_Administrador.txtNumID.setText(rs.getString(1)); 
+                    Tela_Do_Administrador.lblUsuario.setText(rs.getString(2));
+                    Tela_Do_Administrador.txtNumID.setText(rs.getString(1)); 
                 }
                 else if(perfil.equalsIgnoreCase("Enfermeiro")){
 //                     Tela_Do_Enfermeiro te = new Tela_Do_Enfermeiro();
