@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Fabricio Sousa
+ * @author Márcio Sousa
  */
 public class Tela_Administrador_Alterar_Enfermeiro extends javax.swing.JInternalFrame {
 
@@ -82,7 +82,7 @@ public class Tela_Administrador_Alterar_Enfermeiro extends javax.swing.JInternal
 
         String sql = "select  u.id, u.nome, u.login, u.senha,e.TELEFONE_FIXO,e.TELEFONE_CELULAR,e.ENDERECO\n"
                 + "from usuarios as U"
-                + " inner join enfermeiro as e on u.id = e.id where u.ID =?";
+                + " inner join enfermeiro as e on u.id = e.id where login =?";
 
         try {
 
