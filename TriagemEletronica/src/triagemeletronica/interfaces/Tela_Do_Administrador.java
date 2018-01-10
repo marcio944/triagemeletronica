@@ -11,10 +11,13 @@ import javax.swing.JOptionPane;
 import triagemeletronica.interfaces.Tela_Sobre;
 import triagemeletronica.interfaces.administrador.Tela_Administrador_Adicionar_Enfermeiro;
 import triagemeletronica.interfaces.administrador.Tela_Administrador_Adicionar_Medico;
+import triagemeletronica.interfaces.administrador.Tela_Administrador_Alterar_Dados;
 import triagemeletronica.interfaces.administrador.Tela_Administrador_Alterar_Enfermeiro;
 import triagemeletronica.interfaces.administrador.Tela_Administrador_Alterar_Medico;
 import triagemeletronica.interfaces.administrador.Tela_Administrador_Deletar_Enfermeiro;
 import triagemeletronica.interfaces.administrador.Tela_Administrador_Deletar_Medico;
+import triagemeletronica.interfaces.administrador.Tela_Administrador_Relatorios_Listar_Enfermeiro;
+import triagemeletronica.interfaces.administrador.Tela_Administrador_Relatorios_Listar_Medicos;
 //import triagemeletronica.interfaces.administrador.Tela_Administrador_Adicionar_Enfermeiro;
 //import triagemeletronica.interfaces.administrador.Tela_Administrador_Adicionar_Medico;
 
@@ -66,6 +69,7 @@ public class Tela_Do_Administrador extends javax.swing.JFrame {
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
+        jMenuItem12 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrador");
@@ -127,10 +131,20 @@ public class Tela_Do_Administrador extends javax.swing.JFrame {
 
         jMenu2.setText("Relatório");
 
-        jMenuItem3.setText("Médicos");
+        jMenuItem3.setText("Enfermeiros");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem3);
 
-        jMenuItem4.setText("Enfermeiros");
+        jMenuItem4.setText("Médicos");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem4);
 
         jMenuItem5.setText("Pacientes");
@@ -189,11 +203,25 @@ public class Tela_Do_Administrador extends javax.swing.JFrame {
         jMenu6.add(jMenuItem10);
 
         jMenuItem11.setText("Administrador");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem11);
 
         Menu.add(jMenu6);
 
         jMenu5.setText("Sair");
+
+        jMenuItem12.setText("Finalizar Programa");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem12);
+
         Menu.add(jMenu5);
 
         setJMenuBar(Menu);
@@ -307,6 +335,33 @@ public class Tela_Do_Administrador extends javax.swing.JFrame {
        //Desktop.add(ts);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        Tela_Administrador_Relatorios_Listar_Medicos trle = new Tela_Administrador_Relatorios_Listar_Medicos();
+        trle.setVisible(true);
+       Desktop.add(trle);         // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        Tela_Administrador_Relatorios_Listar_Enfermeiro trle = new Tela_Administrador_Relatorios_Listar_Enfermeiro();
+        trle.setVisible(true);
+       Desktop.add(trle);        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+       int sair = JOptionPane.showConfirmDialog(null, "Tem Certeza que deseja Finalizar o Programa?","ATENÇÃO", JOptionPane.YES_NO_OPTION);
+
+        if (sair == JOptionPane.YES_NO_OPTION){
+            System.exit(0);
+        }
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+      
+        Tela_Administrador_Alterar_Dados tad = new Tela_Administrador_Alterar_Dados();
+        tad.setVisible(true);
+        Desktop.add(tad);
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -336,6 +391,18 @@ public class Tela_Do_Administrador extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -360,6 +427,7 @@ public class Tela_Do_Administrador extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
