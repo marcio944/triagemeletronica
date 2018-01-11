@@ -56,7 +56,7 @@ public class Tela_Administrador_Alterar_Medico extends javax.swing.JInternalFram
             
 
                 if (add > 0) {
-                    JOptionPane.showMessageDialog(null, "Cadastrado Com Sucesso");
+                    JOptionPane.showMessageDialog(null, "Alterado Com Sucesso");
                     
                     txtTelFixMed.setText(null);
                     txtTelCelMed.setText(null);
@@ -89,10 +89,10 @@ public class Tela_Administrador_Alterar_Medico extends javax.swing.JInternalFram
                 txtNumIDMed.setText(rs.getString(1));
                 txtNomeMed.setText(rs.getString(2));
                 txtCrmMed.setText(rs.getString(3));
-                //txtSenhaEnf.setText(rs.getString(4));
-                txtEndMed.setText(rs.getString(5));
-                txtTelFixMed.setText(rs.getString(6));
-                txtTelCelMed.setText(rs.getString(7));
+                txtSenhaMed.setText(rs.getString(4));
+                txtEndMed.setText(rs.getString(7));
+                txtTelFixMed.setText(rs.getString(5));
+                txtTelCelMed.setText(rs.getString(6));
             }
 //            tblContatos.setModel(DbUtils.resultSetToTableModel(rs));
 
