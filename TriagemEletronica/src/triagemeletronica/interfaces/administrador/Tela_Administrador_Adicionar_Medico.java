@@ -41,8 +41,12 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
     
    public void adicionar_usuario(Medico medico) throws Exception{
         String sql = "insert into usuarios(nome,login,senha,perfil) values (?,?,?,?)";
-        Validar valiar = new Validar();
-        boolean nomeValido = valiar.checkName(medico.getNome());
+        Validar validar = new Validar();
+        boolean nomeValido = validar.checkName(medico.getNome());
+        boolean crmValido = validar.checkCRM(medico.getCrm());
+        boolean camposNulos = validar.camposNulosMed(medico);
+        boolean senhaValida = validar.checkSenha(medico.getSenha());
+        
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, medico.getNome());
@@ -50,10 +54,11 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
             pst.setString(3, medico.getSenha());
             pst.setString(4, medico.getPerfil());
 
-            if (nomeValido == false) {
+            if (nomeValido == false && crmValido == false && camposNulos == true && senhaValida == true) {
                 int add = pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Médico cadastrado com sucesso!");
             } else {
-                throw new Exception("Dados Inválidos!");
+                throw new Exception("Dados do médico inválidos!");
             }
 
         } catch (SQLException | HeadlessException e) {

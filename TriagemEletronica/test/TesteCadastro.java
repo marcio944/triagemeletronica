@@ -48,7 +48,7 @@ public class TesteCadastro {
         medico.setSenha("abcd#1234");
         medico.setPerfil("Medico");
         
-        enfermeiro.setNome("Marcio Sousa");
+        enfermeiro.setNome("João Sousa");
         enfermeiro.setCoren("9876");
         enfermeiro.setSenha("abcd#4356");
         enfermeiro.setPerfil("Enfermeiro");
@@ -61,7 +61,7 @@ public class TesteCadastro {
         }
         
         String nomeMed = "Marcio Sousa";
-        String nomeEnf = "Marcio Sousa";
+        String nomeEnf = "João Sousa";
         
         String nomeMedico = adicionar.buscaMedico(medico).getNome();
         String nomeEnfermeiro = adicionarEnf.buscaEnfermeiro(enfermeiro).getNome();
@@ -248,7 +248,7 @@ public class TesteCadastro {
         medico.setSenha("Abc#45678");
         medico.setPerfil("Medico");
         
-        enfermeiro.setNome("Fabrício Sousa");
+        enfermeiro.setNome("Fabiano Sousa");
         enfermeiro.setCoren("93257");
         enfermeiro.setSenha("Abc#45456");
         enfermeiro.setPerfil("Enfermeiro");
@@ -324,7 +324,7 @@ public class TesteCadastro {
         medico.setSenha("abcd%$#2134");
         medico.setPerfil("Medico");
         
-        enfermeiro.setNome("Bruno");
+        enfermeiro.setNome("Pedro");
         enfermeiro.setCoren("3456");
         enfermeiro.setSenha("abcd#$%1234");
         enfermeiro.setPerfil("Enfermeiro");
