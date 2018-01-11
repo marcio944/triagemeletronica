@@ -59,7 +59,7 @@ public class Tela_Administrador_Alterar_Enfermeiro extends javax.swing.JInternal
                int add2 = pst2.executeUpdate();
 
                 if (add2 > 0) {
-                    JOptionPane.showMessageDialog(null, "Cadastrado Com Sucesso");
+                    JOptionPane.showMessageDialog(null, "Alterado com Sucesso");
                     
                     txtNomeEnf.setText(null);
                     txtCorenEnf.setText(null);
@@ -95,10 +95,10 @@ public class Tela_Administrador_Alterar_Enfermeiro extends javax.swing.JInternal
                 txtNumIDEnf.setText(rs.getString(1));
                 txtNomeEnf.setText(rs.getString(2));
                 txtCorenEnf.setText(rs.getString(3));
-                //txtSenhaEnf.setText(rs.getString(4));
-                txtEndEnf.setText(rs.getString(5));
-                txtTelFixEnf.setText(rs.getString(6));
-                txtTelCelEnf1.setText(rs.getString(7));
+                txtSenhaEnf.setText(rs.getString(4));
+                txtEndEnf.setText(rs.getString(7));
+                txtTelFixEnf.setText(rs.getString(5));
+                txtTelCelEnf1.setText(rs.getString(6));
             }
 //            tblContatos.setModel(DbUtils.resultSetToTableModel(rs));
 
