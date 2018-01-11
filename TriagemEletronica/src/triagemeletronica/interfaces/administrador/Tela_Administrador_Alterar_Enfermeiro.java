@@ -76,8 +76,7 @@ public class Tela_Administrador_Alterar_Enfermeiro extends javax.swing.JInternal
         }
         }
     }
-
-
+        
     private void pesquisar() {
 
         String sql = "select  u.id, u.nome, u.login, u.senha,e.TELEFONE_FIXO,e.TELEFONE_CELULAR,e.ENDERECO\n"

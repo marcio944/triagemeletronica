@@ -11,7 +11,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import triagemeletronica.modelos.Medico;
 
 /**
  *
@@ -22,6 +25,7 @@ public class Tela_Administrador_Alterar_Medico extends javax.swing.JInternalFram
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
+    Medico medico = new Medico();
 
     /**
      * Creates new form Tela_Agenda_Adicionar
@@ -31,7 +35,7 @@ public class Tela_Administrador_Alterar_Medico extends javax.swing.JInternalFram
         conexao = Conexao.getConnection();
     }
     
-   private void alterar_endereco(){
+   public void alterar_endereco(Medico medico){
        
         String sql = "update medico set Telefone_Fixo=?,Telefone_Celular=?,Endereco=? where id=?";
      
@@ -42,9 +46,9 @@ public class Tela_Administrador_Alterar_Medico extends javax.swing.JInternalFram
         try {
                         
             pst = conexao.prepareStatement(sql);
-            pst.setString(1, txtTelFixMed.getText());
-            pst.setString(2, txtTelCelMed.getText());
-            pst.setString(3, txtEndMed.getText());
+            pst.setString(1, medico.getFone_fixo());
+            pst.setString(2, medico.getFone_celular());
+            pst.setString(3, medico.getEndereco());
             pst.setString(4, txtNumIDMed.getText());
 ;        
             if (txtNomeMed.getText().isEmpty() || txtCrmMed.getText().isEmpty() || txtEndMed.getText().isEmpty() || txtTelCelMed.getText().isEmpty()) {
@@ -71,8 +75,7 @@ public class Tela_Administrador_Alterar_Medico extends javax.swing.JInternalFram
         }
     }
 
-
-    private void pesquisar() {
+    public void pesquisar() {
 
         String sql = "select  u.id, u.nome, u.login, u.senha,e.TELEFONE_FIXO,e.TELEFONE_CELULAR,e.ENDERECO\n"
                 + "from usuarios as U"
@@ -328,7 +331,10 @@ public class Tela_Administrador_Alterar_Medico extends javax.swing.JInternalFram
     }//GEN-LAST:event_txtNomeMedActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-            alterar_endereco();
+        medico.setFone_fixo(txtTelFixMed.getText());
+        medico.setFone_celular(txtTelCelMed.getText());
+        medico.setEndereco(txtEndMed.getText());
+        alterar_endereco(medico);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
