@@ -7,13 +7,14 @@ package triagemeletronica.modelos;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import triagemeletronica.modelos.Medico;
 import triagemeletronica.modelos.Medico;
 import triagemeletronica.modelos.Medico;
 
 /**
  *
- * @author
+ * @author Márcio
  */
 public class Validar {
     
@@ -160,13 +161,15 @@ public class Validar {
 		
 		Pattern p = Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z#!@$%¨&*?+=.,:;\\d]{8,}$");
 		Matcher m = p.matcher(senha);
-		
-		if(m.find()){
-			return true;
-		}else{
-			return false;
-		}
-		
-	}
-    
+                
+                if(m.find()){
+                    return true;
+                }else{
+                    return false;
+                }
+        }
 }
+/**
+ *
+ * @author lenovo user
+ */
