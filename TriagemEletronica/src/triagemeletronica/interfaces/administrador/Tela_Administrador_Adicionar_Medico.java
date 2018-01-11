@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import triagemeletronica.modelos.Medico;
+import triagemeletronica.modelos.Validar;
 
 /**
  *
@@ -26,7 +28,8 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
     PreparedStatement pst2 = null;
     PreparedStatement pst3 = null;
     ResultSet rs = null;
-
+    Medico medico = new Medico();
+    
     /**
      * Creates new form Tela_Agenda_Adicionar
      */
@@ -35,36 +38,38 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
         conexao = Conexao.getConnection();
     }
     
-   public void adicionar_usuario(){
+   public void adicionar_usuario(Medico medico) throws Exception{
         String sql = "insert into usuarios(nome,login,senha,perfil) values (?,?,?,?)";
-
+        Validar valiar = new Validar();
+        boolean nomeValido = valiar.checkName(medico.getNome());
         try {
             pst = conexao.prepareStatement(sql);
-            pst.setString(1, txtNomeMed.getText());
-            pst.setString(2, txtCrmMed.getText());
-            pst.setString(3, txtSenhaMed.getText());
-            pst.setString(4, txtPerfilMed.getText());
+            pst.setString(1, medico.getNome());
+            pst.setString(2, medico.getCrm());
+            pst.setString(3, medico.getSenha());
+            pst.setString(4, medico.getPerfil());
 
-            if (txtNomeMed.getText().isEmpty() || txtCrmMed.getText().isEmpty() || txtSenhaMed.getText().isEmpty() || txtEndMed.getText().isEmpty() || txtTelCelMed.getText().isEmpty()) {
-
-                JOptionPane.showMessageDialog(null, "Preencha todos os Campos Obrigatorios");
-
-            } else {
+            if (nomeValido == false) {
                 int add = pst.executeUpdate();
+            } else {
+                throw new Exception("Dados Inválidos!");
             }
 
         } catch (SQLException | HeadlessException e) {
             JOptionPane.showMessageDialog(null, e);
+        }catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex);
+            throw ex;
         }
     }
        
        
-       private void adicionando () throws SQLException{
-           adicionar_usuario();
+       private void adicionando () throws SQLException, Exception{
+           adicionar_usuario(medico);
            pesquisar();
        }
        
-       private void pesquisar () throws SQLException{
+       public void pesquisar () throws SQLException{
            
            String sql3 = "select *from usuarios where login=?";
           
@@ -83,11 +88,11 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
                 deletando_usuario();
                 
             }else{
-                adicionar_endereco();
+                adicionar_endereco(medico);
             }
        }
 
-       private void adicionar_endereco(){
+       private void adicionar_endereco(Medico medico){
        
         String sql2 = "insert into medico(ID,Telefone_Fixo,Telefone_Celular,Endereco) values (?,?,?,?)";
 
@@ -95,9 +100,9 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
             
             pst2 = conexao.prepareStatement(sql2);
             pst2.setString(1, txtNumIDMed.getText());
-            pst2.setString(2, txtTelFixMed.getText());
-            pst2.setString(3, txtTelCelMed.getText());
-            pst2.setString(4, txtEndMed.getText());        
+            pst2.setString(2, medico.getFone_fixo());
+            pst2.setString(3, medico.getFone_celular());
+            pst2.setString(4, medico.getEndereco());        
                 
                int add2 = pst2.executeUpdate();
 
@@ -262,7 +267,7 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
                                         .addComponent(jLabel4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtEndMed, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                                 .addComponent(txtNumIDMed, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(149, 149, 149))))
         );
@@ -331,21 +336,20 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
  
+        medico.setNome(txtNomeMed.getText());
+        medico.setCrm(txtCrmMed.getText());
+        medico.setSenha(txtSenhaMed.getText());
+        medico.setPerfil(txtPerfilMed.getText());
+        medico.setEndereco(txtEndMed.getText());
+        medico.setFone_fixo(txtTelFixMed.getText());
+        medico.setFone_celular(txtTelCelMed.getText());
+        
         try {
-            if (txtNomeMed.getText().isEmpty() || txtCrmMed.getText().isEmpty() || txtSenhaMed.getText().isEmpty() || txtEndMed.getText().isEmpty() || txtTelCelMed.getText().isEmpty()) {
-
-                JOptionPane.showMessageDialog(null, "Preencha todos os Campos Obrigatorios");
-
-            }else{
-          
-                adicionando();
-                    
-            }
-                } catch (SQLException ex) {
-                    Logger.getLogger(Tela_Administrador_Adicionar_Medico.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            
-             // TODO add your handling code here:
+            adicionando();
+        } catch (Exception ex) {
+            Logger.getLogger(Tela_Administrador_Adicionar_Medico.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
