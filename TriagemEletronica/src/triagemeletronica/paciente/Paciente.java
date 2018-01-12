@@ -11,7 +11,16 @@ package triagemeletronica.paciente;
  */
 public class Paciente {
     private String nome;
-    private String endereco;
+    private String rua;
+    private int numero;
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
     private String bairro;
     private String cidade;
     private String cep;
@@ -45,12 +54,12 @@ public class Paciente {
         this.nome = nome;
     }
 
-    public String getEndereco() {
-        return endereco;
+    public String getRua() {
+        return rua;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setRua(String rua) {
+        this.rua = rua;
     }
 
     public String getBairro() {
