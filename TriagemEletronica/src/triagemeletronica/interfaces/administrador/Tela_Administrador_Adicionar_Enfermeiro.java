@@ -119,7 +119,7 @@ public class Tela_Administrador_Adicionar_Enfermeiro extends javax.swing.JIntern
          //   pst = conexao.prepareStatement(sql);
             
             pst3 = conexao.prepareStatement(sql3);
-            pst3.setString(1,txtCorenEnf.getText());
+            pst3.setString(1,enfermeiro.getCoren());
             rs=pst3.executeQuery();
             
             if (rs.next()){
@@ -129,7 +129,6 @@ public class Tela_Administrador_Adicionar_Enfermeiro extends javax.swing.JIntern
             
             if(txtNumIDEnf.getText().isEmpty()){
                 JOptionPane.showMessageDialog(null, "Erro ao Cadastrar as Informações");
-                deletando_usuario();
                 
             }else{
                 adicionar_endereco(enfermeiro);
@@ -141,7 +140,8 @@ public class Tela_Administrador_Adicionar_Enfermeiro extends javax.swing.JIntern
         String sql2 = "insert into enfermeiro(ID,Telefone_Fixo,Telefone_Celular,Endereco) values (?,?,?,?)";
         Validar validar = new Validar();
         boolean nulos = validar.camposNulosEnfEnd(enfermeiro);
-        boolean fone = validar.checkFone_Fixo(enfermeiro.getFone_fixo());
+        boolean fone10Digitos = validar.checkFone_FixoEnf10Digitos(enfermeiro.getFone_fixo());
+        boolean celular11Digitos = validar.checkCelularEnf11Digitos(enfermeiro.getFone_celular());
         
         try {
             
@@ -151,11 +151,12 @@ public class Tela_Administrador_Adicionar_Enfermeiro extends javax.swing.JIntern
             pst2.setString(3, enfermeiro.getFone_celular());
             pst2.setString(4, enfermeiro.getEndereco());        
             
-            if(nulos == true && fone == false){
+            if(nulos == true && fone10Digitos == true && celular11Digitos == true){
                 pst2.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!"); 
+                JOptionPane.showMessageDialog(null, "Enfermeiro cadastrado com sucesso!"); 
             
             }else{
+                deletando_usuario();
                 throw new Exception("Dados do enfermeiro inválidos");
             }
             
@@ -387,6 +388,9 @@ public class Tela_Administrador_Adicionar_Enfermeiro extends javax.swing.JIntern
         enfermeiro.setCoren(txtCorenEnf.getText());
         enfermeiro.setSenha(txtSenhaEnf.getText());
         enfermeiro.setPerfil(txtPerfilEnf.getText());
+        enfermeiro.setFone_fixo(txtTelFixEnf.getText());
+        enfermeiro.setFone_celular(txtTelCelEnf1.getText());
+        enfermeiro.setEndereco(txtEndEnf.getText());
         
         try {
             adicionando();

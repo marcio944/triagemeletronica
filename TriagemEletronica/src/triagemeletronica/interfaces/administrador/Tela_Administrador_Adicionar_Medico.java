@@ -28,6 +28,7 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
     PreparedStatement pst = null;
     PreparedStatement pst2 = null;
     PreparedStatement pst3 = null;
+    PreparedStatement pst4 = null;
     ResultSet rs = null;
     Medico medico = new Medico();
     
@@ -82,7 +83,7 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
          //   pst = conexao.prepareStatement(sql);
             
             pst3 = conexao.prepareStatement(sql3);
-            pst3.setString(1,txtCrmMed.getText());
+            pst3.setString(1,medico.getCrm());
             rs=pst3.executeQuery();
             
             if (rs.next()){
@@ -92,12 +93,9 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
             
             if(txtNumIDMed.getText().isEmpty()){
                 JOptionPane.showMessageDialog(null, "Erro ao Cadastrar as Informações");
-                deletando_usuario();
-                
             }else{
                 adicionar_endereco(medico);
             }
-            
             
        }
        
@@ -142,24 +140,27 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
       public void adicionar_endereco(Medico medico) throws Exception {
         
         String sql2 = "insert into medico(ID,Telefone_Fixo,Telefone_Celular,Endereco) values (?,?,?,?)";
+        
         Validar validar = new Validar();
         boolean nulos = validar.camposNulosMedEnd(medico);
-        boolean fone = validar.checkFone_Fixo(medico.getFone_fixo());
+        boolean fone_fixo10Digitos = validar.checkFone_FixoMed10Digitos(medico.getFone_fixo());
+        boolean celular11Digitos = validar.checkCelularMed11Digitos(medico.getFone_celular());
         
         try {
             
             pst2 = conexao.prepareStatement(sql2);
-            pst2.setString(1, txtNumIDMed.getText());
+            pst2.setInt(1, medico.getId());
             pst2.setString(2, medico.getFone_fixo());
             pst2.setString(3, medico.getFone_celular());
             pst2.setString(4, medico.getEndereco());        
                 
-            if(nulos == true && fone == false){
+            if(nulos == true && fone_fixo10Digitos == true && celular11Digitos == true){
                 pst2.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!"); 
+                JOptionPane.showMessageDialog(null, "Médico cadastrado com sucesso!"); 
             
             }else{
-                throw new Exception("Dados inválidos");
+                deletando_usuario();
+                throw new Exception("Dados do médico inválidos");
             }
             
 
@@ -199,12 +200,12 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
             throw ex;
         }
     }*/
-           private void deletando_usuario (){
+           public void deletando_usuario (){
                String sql = "delete from usuarios where login=?";
                 
                 try {
                      pst = conexao.prepareStatement(sql);
-                     pst.setString(1, txtCrmMed.getText());
+                     pst.setString(1, medico.getCrm());
                      int del = pst.executeUpdate();
                                           
                 } catch (Exception e) {

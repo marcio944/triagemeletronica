@@ -24,7 +24,10 @@ public class Validar {
     String senha;
     String perfilMed;
     String perfilEnf;
-    String fone_fixo;
+    String fone_fixoMed;
+    String fone_fixoEnf;
+    String celularMed;
+    String celularEnf;
 	
 	public boolean checkName(String nome){
 		
@@ -76,9 +79,7 @@ public class Validar {
         
         public boolean camposNulosEnfEnd(Enfermeiro enfermeiro) {
 		
-		if(!enfermeiro.getFone_fixo().equals("") &&
-                        !enfermeiro.getFone_celular().equals("") &&
-                        !enfermeiro.getEndereco().equals("")) {
+		if(!enfermeiro.getFone_celular().equals("") && !enfermeiro.getEndereco().equals("")) {
 			return true;
 		}else {
 			return false;
@@ -140,14 +141,107 @@ public class Validar {
 		
 	}
         
-        public boolean checkFone_Fixo(String fone_fixo){
+        public boolean checkFone_FixoMed_valido(String fone_fixoMed){
 		
-		this.fone_fixo = fone_fixo;
+		this.fone_fixoMed = fone_fixoMed;
 		
 		Pattern p = Pattern.compile("[A-Za-z!@#$%¨&*;.,]");
-		Matcher m = p.matcher(fone_fixo);
+		Matcher m = p.matcher(fone_fixoMed);
 		
 		if(m.find()){
+			return true;
+		}else{
+			return false;
+		}
+		
+	}
+        
+        public boolean checkFone_FixoMed10Digitos(String fone_fixoMed){
+		
+		this.fone_fixoMed = fone_fixoMed;
+                
+		if(fone_fixoMed.length() == 10){
+			return true;
+		}else{
+			return false;
+		}
+		
+	}
+        
+        public boolean checkFone_FixoEnf_valido(String fone_fixoEnf){
+		
+		this.fone_fixoEnf = fone_fixoEnf;
+		
+		Pattern p = Pattern.compile("[A-Za-z!@#$%¨&*;.,]");
+		Matcher m = p.matcher(fone_fixoEnf);
+		
+		if(m.find()){
+			return true;
+		}else{
+			return false;
+		}
+		
+	}
+        
+        public boolean checkFone_FixoEnf10Digitos(String fone_fixoEnf){
+		
+		this.fone_fixoEnf = fone_fixoEnf;
+                
+		if(fone_fixoEnf.length() == 10){
+			return true;
+		}else{
+			return false;
+		}
+		
+	}
+        
+        public boolean checkCelularMed_valido(String celularMed){
+		
+		this.celularMed = celularMed;
+		
+		Pattern p = Pattern.compile("[A-Za-z!@#$%¨&*;.,]");
+		Matcher m = p.matcher(celularMed);
+		
+		if(m.find()){
+			return true;
+		}else{
+			return false;
+		}
+		
+	}
+        
+        public boolean checkCelularMed11Digitos(String celularMed){
+		
+		this.celularMed = celularMed;
+                
+		if(celularMed.length() == 11){
+			return true;
+		}else{
+			return false;
+		}
+		
+	}
+        
+        public boolean checkCelularEnf_valido(String celularEnf){
+		
+		this.celularEnf = celularEnf;
+		
+		Pattern p = Pattern.compile("[A-Za-z!@#$%¨&*;.,]");
+		Matcher m = p.matcher(celularEnf);
+		
+		if(m.find()){
+			return true;
+		}else{
+			return false;
+		}
+		
+	}
+        
+        public boolean checkCelularEnf11Digitos(String celularEnf){
+		
+		this.celularEnf = celularEnf;
+                
+		if(celularEnf.length() == 11){
 			return true;
 		}else{
 			return false;
