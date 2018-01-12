@@ -28,7 +28,15 @@ public class Paciente {
     private float resultado_test_clicemia;
     private boolean alergia;
     private String resultado_alergia;
+    private int cor; 
 
+    public int getCor() {
+        return cor;
+    }
+
+    public void setCor(int cor) {
+        this.cor = cor;
+    }
     public String getNome() {
         return nome;
     }
