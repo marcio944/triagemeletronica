@@ -101,7 +101,7 @@ public class Triagem extends javax.swing.JFrame {
             }
         });
 
-       
+        
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -336,7 +336,7 @@ public class Triagem extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(158, 158, 158))
+                .addGap(20, 20, 20))
         );
 
         pack();
