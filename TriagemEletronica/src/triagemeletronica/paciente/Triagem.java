@@ -5,17 +5,33 @@
  */
 package triagemeletronica.paciente;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import triagemeletronica.conexao.Conexao;
+
 /**
  *
- * @author JOICE FRAGOSO
+ * @author Esdras Fragoso
  */
 public class Triagem extends javax.swing.JFrame {
 
     /**
      * Creates new form Triagem
      */
+    
+    Connection conexao = null;
+    
+    PreparedStatement pst2 = null;
+    PreparedStatement pst3 = null;
+    
     public Triagem() {
         initComponents();
+        conexao = Conexao.getConnection();
     }
 
     /**
@@ -373,9 +389,21 @@ public class Triagem extends javax.swing.JFrame {
     
     // ativar componentes!
     private void jBVerificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBVerificarMouseClicked
-       
-        String sql = "Select * from ";
+      
         
+        String sql = "SELECT * FROM `paciente` WHERE cartao_sus='"+jTextNumeroCartaoSUS.getText()+"'";
+        System.err.println(jTextNumeroCartaoSUS.getText());
+        try {
+            PreparedStatement stmt = conexao.prepareStatement(sql);
+            
+            ResultSet rs = stmt.executeQuery(sql);
+            String sus = jTextNumeroCartaoSUS.getText(); 
+           
+            if(rs.next()!=false){
+       
+                
+        
+                
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Nome:");
 
@@ -524,6 +552,20 @@ public class Triagem extends javax.swing.JFrame {
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel14.setText("Nº:");
+           
+        jTFNome.setText(rs.getString("nome"));
+        
+        
+            stmt.close();
+            rs.close();
+            
+            }      
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(Triagem.class.getName()).log(Level.SEVERE, null, ex);
+        
+        }
+        
 
     }//GEN-LAST:event_jBVerificarMouseClicked
 
