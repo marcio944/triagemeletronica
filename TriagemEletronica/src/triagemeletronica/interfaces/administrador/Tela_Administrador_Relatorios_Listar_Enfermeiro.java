@@ -32,8 +32,8 @@ public class Tela_Administrador_Relatorios_Listar_Enfermeiro extends javax.swing
         private void pesquisar (){
         
         String sql = "select u.nome AS Nome, u.login AS Coren,e.TELEFONE_FIXO AS Fixo,e.TELEFONE_CELULAR AS Celular,e.ENDERECO AS Endereço\n"
-                + "from usuarios as U"
-                + " inner join enfermeiro as e on u.id = e.id";
+                + "from Usuarios as u"
+                + " inner join Enfermeiro as e on u.id = e.id";
         
         try {
             pst = conexao.prepareStatement(sql);     

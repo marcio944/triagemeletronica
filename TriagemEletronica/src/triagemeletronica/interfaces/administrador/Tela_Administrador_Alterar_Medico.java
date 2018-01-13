@@ -37,7 +37,7 @@ public class Tela_Administrador_Alterar_Medico extends javax.swing.JInternalFram
     
    public void alterar_endereco(Medico medico){
        
-        String sql = "update medico set Telefone_Fixo=?,Telefone_Celular=?,Endereco=? where id=?";
+        String sql = "update Medico set Telefone_Fixo=?,Telefone_Celular=?,Endereco=? where id=?";
      
          int confirma = JOptionPane.showConfirmDialog(null, "Tem Certeza que deseja Alterar esse Contato", "Atenção", JOptionPane.YES_NO_OPTION);
 
@@ -78,8 +78,8 @@ public class Tela_Administrador_Alterar_Medico extends javax.swing.JInternalFram
     public void pesquisar() {
 
         String sql = "select  u.id, u.nome, u.login, u.senha,e.TELEFONE_FIXO,e.TELEFONE_CELULAR,e.ENDERECO\n"
-                + "from usuarios as U"
-                + " inner join medico as e on u.id = e.id where login =?";
+                + "from Usuarios as u"
+                + " inner join Medico as e on u.id = e.id where login =?";
 
         try {
 

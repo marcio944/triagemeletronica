@@ -52,7 +52,7 @@ public class TesteCadastro {
         enfermeiro.setCoren("9876");
         enfermeiro.setSenha("abcd#4356");
         enfermeiro.setPerfil("Enfermeiro");
-        
+ 
         try {
             adicionar.adicionar_usuario(medico);
             adicionarEnf.adicionar_usuario(enfermeiro);

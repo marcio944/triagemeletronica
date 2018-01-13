@@ -40,33 +40,35 @@ public class Tela_Administrador_Adicionar_Enfermeiro extends javax.swing.JIntern
     }
     
        public void adicionar_usuario(Enfermeiro enfermeiro) throws Exception{
-        String sql = "insert into usuarios(nome,login,senha,perfil) values (?,?,?,?)";
-        Validar validar = new Validar();
-        boolean nomeValido = validar.checkName(enfermeiro.getNome());
-        boolean corenValido = validar.checkCoren(enfermeiro.getCoren());
-        boolean perfilValido = validar.checkPerfilEnf(enfermeiro.getPerfil());
-        boolean senhaValida = validar.checkSenha(enfermeiro.getSenha());
-        boolean nulos = validar.camposNulosEnf(enfermeiro);
         
-        try {
-            pst = conexao.prepareStatement(sql);
-            pst.setString(1, enfermeiro.getNome());
-            pst.setString(2, enfermeiro.getCoren());
-            pst.setString(3, enfermeiro.getSenha());
-            pst.setString(4, enfermeiro.getPerfil());
+           String sql = "insert into Usuarios(nome,login,senha,perfil) values (?,?,?,?)";
+        
+            Validar validar = new Validar();
+            boolean nomeValido = validar.checkName(enfermeiro.getNome());
+            boolean corenValido = validar.checkCoren(enfermeiro.getCoren());
+            boolean perfilValido = validar.checkPerfilEnf(enfermeiro.getPerfil());
+            boolean senhaValida = validar.checkSenha(enfermeiro.getSenha());
+            boolean nulos = validar.camposNulosEnf(enfermeiro);
+        
+            try {
+                pst = conexao.prepareStatement(sql);
+                pst.setString(1, enfermeiro.getNome());
+                pst.setString(2, enfermeiro.getCoren());
+                pst.setString(3, enfermeiro.getSenha());
+                pst.setString(4, enfermeiro.getPerfil());
 
-            if(nulos == true && nomeValido == false && perfilValido == true && senhaValida == true && corenValido == false){
-                int add = pst.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Enfermeiro cadastrado com sucesso!");
-            }else{
-                throw new Exception("Dados do enfermeiro inválidos");
-            }    
-        } catch (SQLException | HeadlessException e) {
-            JOptionPane.showMessageDialog(null, e);
-        } catch (Exception ex){
-            JOptionPane.showMessageDialog(null, ex);
-            throw ex;
-        }
+                if(nulos == true && nomeValido == false && perfilValido == true && senhaValida == true && corenValido == false){
+                    int add = pst.executeUpdate();
+                    JOptionPane.showMessageDialog(null, "Dados de usuário cadastrados com sucesso!");
+                }else{
+                    throw new Exception("Dados de usuário inválidos");
+                }    
+            } catch (SQLException | HeadlessException e) {
+                JOptionPane.showMessageDialog(null, e);
+            } catch (Exception ex){
+                JOptionPane.showMessageDialog(null, ex);
+                throw ex;
+            }
     }
        
        
@@ -76,7 +78,7 @@ public class Tela_Administrador_Adicionar_Enfermeiro extends javax.swing.JIntern
        }
        
        public Enfermeiro buscaEnfermeiro(Enfermeiro enfermeiro){
-         String sql = "select * from usuarios where login = ?";
+         String sql = "select * from Usuarios where login = ?";
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, enfermeiro.getCoren());
@@ -95,7 +97,7 @@ public class Tela_Administrador_Adicionar_Enfermeiro extends javax.swing.JIntern
      }
        
        public Enfermeiro buscaEndEnfermeiro(Enfermeiro enfermeiro){
-         String sql = "select * from enfermeiro where id = ?";
+         String sql = "select * from Enfermeiro where id = ?";
         try {
             pst = conexao.prepareStatement(sql);
             pst.setInt(1, enfermeiro.getId());
@@ -114,7 +116,7 @@ public class Tela_Administrador_Adicionar_Enfermeiro extends javax.swing.JIntern
        
        private void pesquisar () throws SQLException, Exception{
            
-           String sql3 = "select *from usuarios where login=?";
+           String sql3 = "select *from Usuarios where login=?";
           
          //   pst = conexao.prepareStatement(sql);
             
@@ -137,41 +139,43 @@ public class Tela_Administrador_Adicionar_Enfermeiro extends javax.swing.JIntern
 
        public void adicionar_endereco(Enfermeiro enfermeiro) throws Exception{
        
-        String sql2 = "insert into enfermeiro(ID,Telefone_Fixo,Telefone_Celular,Endereco) values (?,?,?,?)";
-        Validar validar = new Validar();
-        boolean nulos = validar.camposNulosEnfEnd(enfermeiro);
-        boolean fone10Digitos = validar.checkFone_FixoEnf10Digitos(enfermeiro.getFone_fixo());
-        boolean celular11Digitos = validar.checkCelularEnf11Digitos(enfermeiro.getFone_celular());
+            String sql2 = "insert into Enfermeiro(ID,Telefone_Fixo,Telefone_Celular,Endereco) values (?,?,?,?)";
         
-        try {
+            Validar validar = new Validar();
+            boolean nulos = validar.camposNulosEnfEnd(enfermeiro);
+            boolean fone10Digitos = validar.checkFone_FixoEnf10DigitosOuNulo(enfermeiro.getFone_fixo());
+            boolean celular11Digitos = validar.checkCelularEnf11Digitos(enfermeiro.getFone_celular());
+        
+            try {
             
-            pst2 = conexao.prepareStatement(sql2);
-            pst2.setInt(1, enfermeiro.getId());
-            pst2.setString(2, enfermeiro.getFone_fixo());
-            pst2.setString(3, enfermeiro.getFone_celular());
-            pst2.setString(4, enfermeiro.getEndereco());        
+                pst2 = conexao.prepareStatement(sql2);
+                pst2.setInt(1, enfermeiro.getId());
+                pst2.setString(2, enfermeiro.getFone_fixo());
+                pst2.setString(3, enfermeiro.getFone_celular());
+                pst2.setString(4, enfermeiro.getEndereco());        
             
-            if(nulos == true && fone10Digitos == true && celular11Digitos == true){
-                pst2.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Enfermeiro cadastrado com sucesso!"); 
+                if(nulos == true && fone10Digitos == true && celular11Digitos == true){
+                    pst2.executeUpdate();
+                    JOptionPane.showMessageDialog(null, "Dados de endereço cadastrados com sucesso!"); 
             
-            }else{
-                deletando_usuario();
-                throw new Exception("Dados do enfermeiro inválidos");
+                }else{
+                    deletando_usuario();
+                    throw new Exception("Dados de endereço inválidos. Enfermeiro excluido!");
+                }
+            
+            
+            
+            } catch (SQLException | HeadlessException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }catch (Exception ex){
+                JOptionPane.showMessageDialog(null, ex);
+                throw ex;
             }
-            
-            
-            
-        } catch (SQLException | HeadlessException e) {
-            JOptionPane.showMessageDialog(null, e);
-        }catch (Exception ex){
-            JOptionPane.showMessageDialog(null, ex);
-            throw ex;
-        }
-    }
+    
+       }
        
            private void deletando_usuario (){
-               String sql = "delete from usuarios where login=?";
+               String sql = "delete from Usuarios where login=?";
                 
                 try {
                      pst = conexao.prepareStatement(sql);
