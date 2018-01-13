@@ -38,10 +38,10 @@ public class Tela_Administrador_Deletar_Enfermeiro extends javax.swing.JInternal
             
             if (confirma==JOptionPane.YES_OPTION){
                 
-                  String sql = "DELETE FROM enfermeiro, usuarios\n" +
-                          "USING enfermeiro\n" +
-                          "INNER JOIN usuarios USING(id)\n" +
-                          "WHERE enfermeiro.id=?";
+                  String sql = "DELETE FROM Enfermeiro, Usuarios\n" +
+                          "USING Enfermeiro\n" +
+                          "INNER JOIN Usuarios USING(id)\n" +
+                          "WHERE Enfermeiro.ID=?";
 
                     try {
                      pst = conexao.prepareStatement(sql);
@@ -73,8 +73,8 @@ public class Tela_Administrador_Deletar_Enfermeiro extends javax.swing.JInternal
        private void pesquisar() {
 
         String sql = "select  u.id, u.nome, u.login, u.senha,e.TELEFONE_FIXO,e.TELEFONE_CELULAR,e.ENDERECO\n"
-                + "from usuarios as U"
-                + " inner join enfermeiro as e on u.id = e.id where login =?";
+                + "from Usuarios as u"
+                + " inner join Enfermeiro as e on u.id = e.id where login =?";
 
         try {
 

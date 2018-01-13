@@ -56,7 +56,7 @@ public class Validar {
         
         public boolean camposNulosMedEnd(Medico medico) {
 		
-		if(!medico.getFone_fixo().equals("") && !medico.getFone_celular().equals("") && !medico.getEndereco().equals("")) {
+		if(!medico.getFone_celular().equals("") && !medico.getEndereco().equals("")) {
 			return true;
 		}else {
 			return false;
@@ -156,11 +156,11 @@ public class Validar {
 		
 	}
         
-        public boolean checkFone_FixoMed10Digitos(String fone_fixoMed){
+        public boolean checkFone_FixoMed10DigitosOuNulo(String fone_fixoMed){
 		
 		this.fone_fixoMed = fone_fixoMed;
                 
-		if(fone_fixoMed.length() == 10){
+		if(fone_fixoMed.length() == 10 || fone_fixoMed.isEmpty()){
 			return true;
 		}else{
 			return false;
@@ -183,11 +183,11 @@ public class Validar {
 		
 	}
         
-        public boolean checkFone_FixoEnf10Digitos(String fone_fixoEnf){
+        public boolean checkFone_FixoEnf10DigitosOuNulo(String fone_fixoEnf){
 		
 		this.fone_fixoEnf = fone_fixoEnf;
                 
-		if(fone_fixoEnf.length() == 10){
+		if(fone_fixoEnf.length() == 10 || fone_fixoEnf.isEmpty()){
 			return true;
 		}else{
 			return false;

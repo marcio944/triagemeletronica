@@ -37,7 +37,7 @@ public class Tela_Administrador_Alterar_Dados extends javax.swing.JInternalFrame
         
         private void alterar_dados_administrador(){
        
-        String sql2 = "update usuarios set nome=?,login=?,senha=? where id=?";
+        String sql2 = "update Usuarios set nome=?,login=?,senha=? where id=?";
       
          int confirma = JOptionPane.showConfirmDialog(null, "Tem Certeza que deseja Alterar os Dados do Usuario ", "Atenção", JOptionPane.YES_NO_OPTION);
 
@@ -76,7 +76,7 @@ public class Tela_Administrador_Alterar_Dados extends javax.swing.JInternalFrame
 
     private void pesquisar() {
 
-        String sql = "select  *from usuarios where login =? And Id=?";
+        String sql = "select  *from Usuarios where login =? And Id=?";
 
         try {
 

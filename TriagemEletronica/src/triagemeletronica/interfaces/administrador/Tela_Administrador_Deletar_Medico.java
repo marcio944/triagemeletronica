@@ -36,10 +36,10 @@ public class Tela_Administrador_Deletar_Medico extends javax.swing.JInternalFram
         int confirma = JOptionPane.showConfirmDialog(null, "Tem Certeza que deseja Remover esse Usuario","Atenção",JOptionPane.YES_NO_OPTION);
         if (confirma==JOptionPane.YES_OPTION){
             //String sql = "delete from usuarios where id=?";
-            String sql = "DELETE FROM medico, usuarios\n" +
-                  "USING medico\n" +
-                  "INNER JOIN usuarios USING(id)\n" +
-                  "WHERE medico.id=?";
+            String sql = "DELETE FROM Medico, Usuarios\n" +
+                  "USING Medico\n" +
+                  "INNER JOIN Usuarios USING(id)\n" +
+                  "WHERE Medico.id=?";
             try {
                 pst = conexao.prepareStatement(sql);
                 pst.setString(1, txtNumIDMed.getText());
@@ -66,8 +66,8 @@ public class Tela_Administrador_Deletar_Medico extends javax.swing.JInternalFram
    
     private void pesquisar() {
         String sql = "select  u.id, u.nome, u.login, u.senha,e.TELEFONE_FIXO,e.TELEFONE_CELULAR,e.ENDERECO\n"
-                + "from usuarios as U"
-                + " inner join medico as e on u.id = e.id where login =?";
+                + "from Usuarios as u"
+                + " inner join Medico as e on u.id = e.id where login =?";
         try{
             pst = conexao.prepareStatement(sql);
             pst.setString(1, txtBuscarMed.getText());

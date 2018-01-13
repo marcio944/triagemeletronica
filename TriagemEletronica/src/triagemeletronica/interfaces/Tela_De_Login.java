@@ -32,7 +32,7 @@ public class Tela_De_Login extends javax.swing.JFrame {
 
     public void autenticacao() {
 
-        String sql = "select * from usuarios where login =? and senha =?";
+        String sql = "select * from Usuarios where login =? and senha =?";
 
         try {
 

@@ -41,7 +41,7 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
     }
     
    public void adicionar_usuario(Medico medico) throws Exception{
-        String sql = "insert into usuarios(nome,login,senha,perfil) values (?,?,?,?)";
+        String sql = "insert into Usuarios(nome,login,senha,perfil) values (?,?,?,?)";
         Validar validar = new Validar();
         boolean nomeValido = validar.checkName(medico.getNome());
         boolean crmValido = validar.checkCRM(medico.getCrm());
@@ -57,9 +57,9 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
 
             if (nomeValido == false && crmValido == false && camposNulos == true && senhaValida == true) {
                 int add = pst.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Médico cadastrado com sucesso!");
+                JOptionPane.showMessageDialog(null, "Dados de usuário cadastrados com sucesso!");
             } else {
-                throw new Exception("Dados do médico inválidos!");
+                throw new Exception("Dados de usuário inválidos!");
             }
 
         } catch (SQLException | HeadlessException e) {
@@ -78,7 +78,7 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
        
        public void pesquisar () throws SQLException, Exception{
            
-           String sql3 = "select *from usuarios where login=?";
+           String sql3 = "select *from Usuarios where login=?";
            
          //   pst = conexao.prepareStatement(sql);
             
@@ -101,7 +101,7 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
        
    
     public Medico buscaMedico(Medico medico){
-         String sql = "select * from usuarios where login = ?";
+         String sql = "select * from Usuarios where login = ?";
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, medico.getCrm());
@@ -120,7 +120,7 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
      }
        
      public Medico buscaEndMedico(Medico medico){
-         String sql = "select * from medico where id = ?";
+         String sql = "select * from Medico where id = ?";
         try {
             pst = conexao.prepareStatement(sql);
             pst.setInt(1, medico.getId());
@@ -139,11 +139,11 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
      
       public void adicionar_endereco(Medico medico) throws Exception {
         
-        String sql2 = "insert into medico(ID,Telefone_Fixo,Telefone_Celular,Endereco) values (?,?,?,?)";
+        String sql2 = "insert into Medico(ID,Telefone_Fixo,Telefone_Celular,Endereco) values (?,?,?,?)";
         
         Validar validar = new Validar();
         boolean nulos = validar.camposNulosMedEnd(medico);
-        boolean fone_fixo10Digitos = validar.checkFone_FixoMed10Digitos(medico.getFone_fixo());
+        boolean fone_fixo10Digitos = validar.checkFone_FixoMed10DigitosOuNulo(medico.getFone_fixo());
         boolean celular11Digitos = validar.checkCelularMed11Digitos(medico.getFone_celular());
         
         try {
@@ -156,11 +156,11 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
                 
             if(nulos == true && fone_fixo10Digitos == true && celular11Digitos == true){
                 pst2.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Médico cadastrado com sucesso!"); 
+                JOptionPane.showMessageDialog(null, "Dados de endereço e telefone cadastrados com sucesso!"); 
             
             }else{
                 deletando_usuario();
-                throw new Exception("Dados do médico inválidos");
+                throw new Exception("Dados de endereço inválidos. Médico excluido!");
             }
             
 
@@ -172,46 +172,20 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
         }
         
       }    
-       /*public void adicionar_endereco(Medico medico) throws Exception{
-       
-        String sql2 = "insert into medico(ID,Telefone_Fixo,Telefone_Celular,Endereco) values (?,?,?,?)";
-        Validar validar = new Validar();
-        boolean fone_fixo = validar.checkFone_Fixo(medico.getFone_fixo());
-        
-        try {
-            
-            pst2 = conexao.prepareStatement(sql2);
-            pst2.setString(1, txtNumIDMed.getText());
-            pst2.setString(2, medico.getFone_fixo());
-            pst2.setString(3, medico.getFone_celular());
-            pst2.setString(4, medico.getEndereco());        
+      
+    public void deletando_usuario (){
+               
+        String sql = "delete from Usuarios where login=?";
                 
-            if(fone_fixo == true){
-                pst2.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Dados inseridos com sucesso!");
-            }else{
-                throw new Exception("Dados Inválidos");
-            }
-            
-        } catch (SQLException | HeadlessException e) {
-            JOptionPane.showMessageDialog(null, "Dados invalidos"+e);
-        }catch (Exception ex){
-            JOptionPane.showMessageDialog(null, ex);
-            throw ex;
-        }
-    }*/
-           public void deletando_usuario (){
-               String sql = "delete from usuarios where login=?";
-                
-                try {
-                     pst = conexao.prepareStatement(sql);
-                     pst.setString(1, medico.getCrm());
-                     int del = pst.executeUpdate();
+            try {
+                pst = conexao.prepareStatement(sql);
+                pst.setString(1, medico.getCrm());
+                int del = pst.executeUpdate();
                                           
-                } catch (Exception e) {
-                     JOptionPane.showConfirmDialog(null,e);
-                }
-           }
+            } catch (Exception e) {
+                JOptionPane.showConfirmDialog(null,e);
+            }
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
