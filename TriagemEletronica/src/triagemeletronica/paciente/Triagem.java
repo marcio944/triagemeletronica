@@ -373,6 +373,9 @@ public class Triagem extends javax.swing.JFrame {
     
     // ativar componentes!
     private void jBVerificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBVerificarMouseClicked
+       
+        String sql = "Select * from ";
+        
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Nome:");
 
