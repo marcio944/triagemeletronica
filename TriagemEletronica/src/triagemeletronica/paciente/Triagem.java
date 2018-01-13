@@ -118,7 +118,6 @@ public class Triagem extends javax.swing.JFrame {
         });
 
         
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -386,6 +385,26 @@ public class Triagem extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_SistoleActionPerformed
 
+    public static String [] Regiao() throws SQLException{
+       String sql = "SELECT Nome FROM `regiao`";
+       Conexao c = new Conexao();
+       Connection con = c.getConnection();
+       PreparedStatement stmt = con.prepareStatement(sql); 
+       ResultSet rs = stmt.executeQuery(sql);
+       String[] r = new  String[5]; 
+      // rs.last();
+      // int totalOfRecords = rs.getRow();
+      // rs.beforeFirst();
+      // System.err.println(totalOfRecords);
+       int i =0;
+       while (rs.next()) {            
+                r[i] = rs.getString("Nome");
+                i++;
+
+        }
+        
+        return r; 
+    }
     
     // ativar componentes!
     private void jBVerificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBVerificarMouseClicked
@@ -402,7 +421,6 @@ public class Triagem extends javax.swing.JFrame {
             if(rs.next()!=false){
        
                 
-        
                 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Nome:");
@@ -425,9 +443,7 @@ public class Triagem extends javax.swing.JFrame {
         jlEstado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jlEstado.setText("Estado");
 
-        jComboBoxEstado.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jComboBoxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
+       
         jLCidade.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLCidade.setText("Cidade");
 
@@ -447,7 +463,7 @@ public class Triagem extends javax.swing.JFrame {
         jLZona.setText("Zona:");
 
         jComboBoxZona.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jComboBoxZona.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxZona.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "URBANA", "RURAL" }));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("O paciente tem diabetes:");
@@ -542,7 +558,7 @@ public class Triagem extends javax.swing.JFrame {
         jLabel12.setText("Região:");
 
         jComboBoxRegiao.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jComboBoxRegiao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxRegiao.setModel(new javax.swing.DefaultComboBoxModel<>(Regiao()));
 
         jComboBoxBairro.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jComboBoxBairro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -554,7 +570,9 @@ public class Triagem extends javax.swing.JFrame {
         jLabel14.setText("Nº:");
            
         jTFNome.setText(rs.getString("nome"));
-        
+        jTFCEP.setText(rs.getString("cep"));
+        jTFRG.setText(rs.getString("rg"));
+        jTextFieldNumero.setText(rs.getString("numero"));
         
             stmt.close();
             rs.close();
@@ -572,6 +590,17 @@ public class Triagem extends javax.swing.JFrame {
     private void jBVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVerificarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBVerificarActionPerformed
+
+    private void jComboBoxRegiaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxRegiaoMouseClicked
+       // colocar o estado 
+        
+        jComboBoxEstado.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jComboBoxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        
+        
+        
+    }//GEN-LAST:event_jComboBoxRegiaoMouseClicked
 
     /**
      * @param args the command line arguments
