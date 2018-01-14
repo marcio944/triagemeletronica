@@ -42,6 +42,7 @@ public class Triagem extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
@@ -117,6 +118,120 @@ public class Triagem extends javax.swing.JFrame {
             }
         });
 
+        
+        
+        jTFBairro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFBairroActionPerformed(evt);
+            }
+        });
+
+        
+        
+        
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jComboBoxRegiao, org.jdesktop.beansbinding.ELProperty.create("${selectedItem}"), jComboBoxEstado, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
+        bindingGroup.addBinding(binding);
+
+        
+
+        jLRG.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLRG.setText("RG");
+
+        jTFRG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFRGActionPerformed(evt);
+            }
+        });
+
+
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
+
+
+        jTextFieldTemperatura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldTemperaturaActionPerformed(evt);
+            }
+        });
+
+        jCheckBoxDores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxDoresActionPerformed(evt);
+            }
+        });
+
+
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
+
+
+        Sistole.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SistoleActionPerformed(evt);
+            }
+        });
+
+		
+	 jComboBoxRegiao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+					jComboBoxEstado.removeAllItems();	
+					
+				   String id;
+					String regiao =  (String) jComboBoxRegiao.getSelectedItem();
+					if(regiao == "Norte")
+						id = "1";
+					else if(regiao == "Nordeste")
+						id = "2";
+					else if(regiao == "Sudeste")
+						id = "3";
+					else if(regiao == "Sul")
+						id = "4";
+					else if(regiao == "Centro-Oeste")
+						id = "5";
+					else
+						id = "2"; 
+      String sql = "SELECT Nome FROM `estado` WHERE Regiao="+id;
+       Conexao c = new Conexao();
+       Connection con = c.getConnection();
+       try {
+	   PreparedStatement stmt = con.prepareStatement(sql); 
+       ResultSet rs = stmt.executeQuery(sql);
+       
+       //rs.last();
+       //int totalOfRecords = 1 + rs.getRow();
+       //rs.beforeFirst();
+      
+      
+       while (rs.next()) {            
+           jComboBoxEstado.addItem(rs.getString("Nome")); 
+           
+        }
+					 } catch (SQLException ex) {
+            Logger.getLogger(Triagem.class.getName()).log(Level.SEVERE, null, ex);
+        
+        }
+					
+            }
+        });
+
+		jComboBoxEstado.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+
+					jComboBoxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {  }));
+
+		
+		
+		
+		
+		
+		
+        jScrollPane1.setViewportView(jTextPaneMotivoDaVinda);
+        
         
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -354,6 +469,8 @@ public class Triagem extends javax.swing.JFrame {
                 .addGap(20, 20, 20))
         );
 
+        bindingGroup.bind();
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -396,7 +513,8 @@ public class Triagem extends javax.swing.JFrame {
       // int totalOfRecords = rs.getRow();
       // rs.beforeFirst();
       // System.err.println(totalOfRecords);
-       int i =0;
+      
+      int i =0;
        while (rs.next()) {            
                 r[i] = rs.getString("Nome");
                 i++;
@@ -591,16 +709,23 @@ public class Triagem extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jBVerificarActionPerformed
 
+   
+      
+
+    
+    
     private void jComboBoxRegiaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxRegiaoMouseClicked
-       // colocar o estado 
-        
-        jComboBoxEstado.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jComboBoxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+       
 
         
         
         
     }//GEN-LAST:event_jComboBoxRegiaoMouseClicked
+
+    private void jComboBoxRegiaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxRegiaoActionPerformed
+      // colocar o estado 
+      
+    }//GEN-LAST:event_jComboBoxRegiaoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -649,7 +774,7 @@ public class Triagem extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBoxBairro;
     private javax.swing.JComboBox<String> jComboBoxCidade;
     private javax.swing.JComboBox<String> jComboBoxCor;
-    private javax.swing.JComboBox<String> jComboBoxEstado;
+    public javax.swing.JComboBox<String> jComboBoxEstado;
     private javax.swing.JComboBox<String> jComboBoxMotivoDaVienda;
     private javax.swing.JComboBox<String> jComboBoxProcedencia;
     private javax.swing.JComboBox<String> jComboBoxRegiao;
@@ -693,5 +818,6 @@ public class Triagem extends javax.swing.JFrame {
     private javax.swing.JTextField jTextNumeroCartaoSUS;
     private javax.swing.JTextPane jTextPaneMotivoDaVinda;
     private javax.swing.JLabel jlEstado;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

@@ -21,6 +21,9 @@ import java.sql.SQLException;
 
 // Diego testando repositório 
 public class Conexao {
+
+    public Conexao() {
+    }
     
     public static Connection getConnection(){
         
@@ -32,7 +35,7 @@ public class Conexao {
             
             Class.forName("com.mysql.jdbc.Driver");
             
-            con=DriverManager.getConnection(db_url,"root","root");
+            con=DriverManager.getConnection(db_url,"root","");
             
         }catch (ClassNotFoundException ex){
             System.out.println("Driver do MYSQL não Encontrado");
