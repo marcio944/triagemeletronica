@@ -394,6 +394,68 @@ public class TesteCadastro {
         adicionarEnf.adicionar_usuario(enfermeiro);
         
     }
+     @Test
+    public void testeFone_Fixo_e_Celular_Valido() throws Exception {
+        //teste de medico e enfermeiro validos (10 digitos fixo,11 digitos  celular)
+        Tela_Administrador_Adicionar_Medico adicionar = new Tela_Administrador_Adicionar_Medico();
+        Tela_Administrador_Adicionar_Enfermeiro adicionarEnf = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Medico medico = new Medico();
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        medico.setId(4);
+        medico.setFone_fixo("8934222433");
+        medico.setFone_celular("89999999429");
+        medico.setEndereco("Bairro Junco");
+        
+        enfermeiro.setId(5);
+        enfermeiro.setFone_fixo("8934225678");
+        enfermeiro.setFone_celular("89932199429");
+        enfermeiro.setEndereco("Centro");
+        
+        adicionar.adicionar_endereco(medico);
+        adicionarEnf.adicionar_endereco(enfermeiro);
+        
+        String fone_fixo_Med = "8934222433";
+        String fone_fixo_Enf = "8934225678";
+        String fone_celu_Med = "89999999429";
+        String fone_celu_Enf = "89932199429";
+                
+        String fone_fixo_Medico = adicionar.buscaEndMedico(medico).getFone_fixo();
+        String fone_fixo_Enfermeiro = adicionarEnf.buscaEndEnfermeiro(enfermeiro).getFone_fixo();
+        String fone_celu_Medico = adicionar.buscaEndMedico(medico).getFone_celular();
+        String fone_celu_Enfermeiro = adicionarEnf.buscaEndEnfermeiro(enfermeiro).getFone_celular();
+        
+        assertEquals(fone_fixo_Medico, fone_fixo_Med);
+        assertEquals(fone_fixo_Enfermeiro, fone_fixo_Enf);
+        assertEquals(fone_celu_Medico, fone_celu_Med);
+        assertEquals(fone_celu_Enfermeiro, fone_celu_Enf);
+        
+    }
+    
+     @Test(expected = Exception.class)
+    public void testeFone_Fixo_e_Celular_Invalido_1valoracima() throws Exception{
+             //teste de medico e enfermeiro Invalidos (11 digitos fixo,12 digitos celular)estes testes de valores invalidos sao de limite para os dois
+        Tela_Administrador_Adicionar_Medico adicionar = new Tela_Administrador_Adicionar_Medico();
+        Tela_Administrador_Adicionar_Enfermeiro adicionarEnf = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Medico medico = new Medico();
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        medico.setId(6);
+        medico.setFone_fixo("34228078156");
+        medico.setFone_celular("899994668481");
+        medico.setEndereco("Paraibinha");
+        
+        enfermeiro.setId(7);
+        enfermeiro.setFone_fixo("89342287801");
+        enfermeiro.setFone_celular("899995665451");
+        enfermeiro.setEndereco("Cohab");
+        
+        adicionar.adicionar_endereco(medico);
+        adicionarEnf.adicionar_endereco(enfermeiro);
+        
+    }
 
 }
     
