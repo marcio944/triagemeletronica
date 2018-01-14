@@ -457,6 +457,57 @@ public class TesteCadastro {
         
     }
 
-}
+
     
 
+    
+    @Test(expected = Exception.class)
+    public void testeFone_Fixo_e_Celular_Invalido_1valorabaixo() throws Exception{
+             //teste de medico e enfermeiro Invalidos (9 digitos fixo,10 digitos celular)estes testes de valores invalidos sao de limite para os dois
+        Tela_Administrador_Adicionar_Medico adicionar = new Tela_Administrador_Adicionar_Medico();
+        Tela_Administrador_Adicionar_Enfermeiro adicionarEnf = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Medico medico = new Medico();
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        medico.setId(8);
+        medico.setFone_fixo("893422243");
+        medico.setFone_celular("8999999942");
+        medico.setEndereco("Mesquita");
+        
+        enfermeiro.setId(9);
+        enfermeiro.setFone_fixo("893422156");
+        enfermeiro.setFone_celular("8993214994");
+        enfermeiro.setEndereco("Olavo Quadros");
+        
+        adicionar.adicionar_endereco(medico);
+        adicionarEnf.adicionar_endereco(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeCelular_Nulo() throws Exception{
+       //teste de medico e enfermeiro Invalidos (9 digitos fixo,10 digitos celular)estes testes de valores invalidos sao de limite para os dois
+        Tela_Administrador_Adicionar_Medico adicionar = new Tela_Administrador_Adicionar_Medico();
+        Tela_Administrador_Adicionar_Enfermeiro adicionarEnf = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Medico medico = new Medico();
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        medico.setId(8);
+        medico.setFone_fixo("8934222433");
+        medico.setFone_celular("");
+        medico.setEndereco("Mesquita");
+        
+        enfermeiro.setId(9);
+        enfermeiro.setFone_fixo("34222433");
+        enfermeiro.setFone_celular("");
+        enfermeiro.setEndereco("Olavo Quadros");
+        
+        adicionar.adicionar_endereco(medico);
+        adicionarEnf.adicionar_endereco(enfermeiro);
+        
+    }
+
+}
+    
