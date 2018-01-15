@@ -80,7 +80,15 @@ public class Triagem  extends JFrame{
     private javax.swing.JTextField jTextNumeroCartaoSUS;
     private javax.swing.JTextPane jTextPaneMotivoDaVinda;
     private javax.swing.JLabel jlEstado;
+    private boolean tria; 
 
+    public boolean getTria() {
+        return tria;
+    }
+
+    public void setTria(boolean tria) {
+        this.tria = tria;
+    }
     
 
 
@@ -155,6 +163,24 @@ public Triagem() {
 
         
         
+        
+        
+        
+            jButtonTriagem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(getTria()){
+                    System.err.println("adiciona");
+                }else{
+                    System.out.println("Cadastrar");
+                }
+                
+             }
+        });
+        
+        
+        
+        
          jBVerificar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -172,7 +198,7 @@ public Triagem() {
            
             if(rs.next()!=false){
        
-                
+                setTria(true);
                 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Nome:");
@@ -299,20 +325,26 @@ public Triagem() {
         jTFBairro.setText(Rua_has_bairro(rs.getString("rua_has_bairro_id"), 0));
         jComboBoxEstado.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         
-       
-       
+                      
+                                        
         
         
             stmt.close();
             rs.close();
             
+            }else{
+                setTria(false);
+             jButtonTriagem.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+             jButtonTriagem.setText("Realizar Triagem");    
+                
+                
             }      
         
         } catch (SQLException ex) {
             Logger.getLogger(triagemeletronica.paciente.Triagem.class.getName()).log(Level.SEVERE, null, ex);
         
         }
-        
+                   
             }
         });
         
@@ -718,7 +750,7 @@ public Triagem() {
        rs.beforeFirst();
       // System.err.println(totalOfRecords);
       String[] r = new  String[totalOfRecords+1]; 
-      r[0] = "Selecione a Procedencia ou Informe ao Lado!"; 
+      r[0] = "Selecione a Procedencia ou Informe Abaixo!"; 
       int i =1;
         while (rs.next()) {            
                 r[i] = rs.getString("motivo_da_vinda");
@@ -800,6 +832,13 @@ public static String bairro(String id) throws SQLException{
         return r;
 }
 
+
+public static void atualiza(){
+    
+    
+    
+    
+}
 
 
 
