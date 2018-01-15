@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import triagemeletronica.modelos.Medico;
+import triagemeletronica.modelos.Validar;
 
 /**
  *
@@ -35,45 +36,64 @@ public class Tela_Administrador_Alterar_Medico extends javax.swing.JInternalFram
         conexao = Conexao.getConnection();
     }
     
-   public void alterar_endereco(Medico medico){
+    public void alterar_endereco(Medico medico) throws Exception{
        
         String sql = "update Medico set Telefone_Fixo=?,Telefone_Celular=?,Endereco=? where id=?";
      
-         int confirma = JOptionPane.showConfirmDialog(null, "Tem Certeza que deseja Alterar esse Contato", "Atenção", JOptionPane.YES_NO_OPTION);
+        int confirma = JOptionPane.showConfirmDialog(null, "Tem Certeza que deseja Alterar esse Contato", "Atenção", JOptionPane.YES_NO_OPTION);
 
         if (confirma == JOptionPane.YES_OPTION) {
-        
-        try {
-                        
-            pst = conexao.prepareStatement(sql);
-            pst.setString(1, medico.getFone_fixo());
-            pst.setString(2, medico.getFone_celular());
-            pst.setString(3, medico.getEndereco());
-            pst.setString(4, txtNumIDMed.getText());
-;        
-            if (txtNomeMed.getText().isEmpty() || txtCrmMed.getText().isEmpty() || txtEndMed.getText().isEmpty() || txtTelCelMed.getText().isEmpty()) {
-
-                JOptionPane.showMessageDialog(null, "Preencha todos os Campos Obrigatorios");
-
-            } else {
-                int add = pst.executeUpdate();
             
+            Validar validar = new Validar();
+            boolean nulos = validar.camposNulosMedEnd(medico);
+            boolean fone_fixo10Digitos = validar.checkFone_FixoMed10DigitosOuNulo(medico.getFone_fixo());
+            boolean celular11Digitos = validar.checkCelularMed11Digitos(medico.getFone_celular());
+        
+            try {
+            
+                pst = conexao.prepareStatement(sql);
+                pst.setString(1, medico.getFone_fixo());
+                pst.setString(2, medico.getFone_celular());
+                pst.setString(3, medico.getEndereco()); 
+                pst.setInt(4, medico.getId());
 
-                if (add > 0) {
-                    JOptionPane.showMessageDialog(null, "Alterado Com Sucesso");
-                    
-                    txtTelFixMed.setText(null);
-                    txtTelCelMed.setText(null);
-                    txtEndMed.setText(null);
-                    txtNumIDMed.setText(null);
+                
+                if(nulos == true && fone_fixo10Digitos == true && celular11Digitos == true){
+                    pst.executeUpdate();
+                    JOptionPane.showMessageDialog(null, "Dados do médico alterados com sucesso!"); 
+                }else{
+                    throw new Exception("Erro ao alterar dados do médico!!");
                 }
-             }
 
-        } catch (SQLException | HeadlessException e) {
-            JOptionPane.showMessageDialog(null, e);
+            
+            } catch (SQLException | HeadlessException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }catch (Exception ex){
+                JOptionPane.showMessageDialog(null, ex);
+                throw ex;
+            }
+            
         }
-        }
+        
     }
+    
+    public Medico buscaEndMedico(Medico medico){
+         String sql = "select * from Medico where id = ?";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setInt(1, medico.getId());
+            rs = pst.executeQuery();
+            if(rs.next()){
+                medico.setFone_fixo(rs.getString("TELEFONE_FIXO"));
+                medico.setFone_celular(rs.getString("TELEFONE_CELULAR"));
+                medico.setEndereco(rs.getString("ENDERECO"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Tela_Administrador_Adicionar_Medico.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+         return medico;
+     }
 
     public void pesquisar() {
 
@@ -331,11 +351,16 @@ public class Tela_Administrador_Alterar_Medico extends javax.swing.JInternalFram
     }//GEN-LAST:event_txtNomeMedActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        medico.setId(Integer.parseInt(txtNumIDMed.getText()));
         medico.setFone_fixo(txtTelFixMed.getText());
         medico.setFone_celular(txtTelCelMed.getText());
         medico.setEndereco(txtEndMed.getText());
-        alterar_endereco(medico);
-        // TODO add your handling code here:
+        try {
+            alterar_endereco(medico);
+            // TODO add your handling code here:
+        } catch (Exception ex) {
+            Logger.getLogger(Tela_Administrador_Alterar_Medico.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

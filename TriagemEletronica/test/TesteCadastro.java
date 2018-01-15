@@ -394,7 +394,8 @@ public class TesteCadastro {
         adicionarEnf.adicionar_usuario(enfermeiro);
         
     }
-     @Test
+     
+    @Test
     public void testeFone_Fixo_e_Celular_Valido() throws Exception {
         //teste de medico e enfermeiro validos (10 digitos fixo,11 digitos  celular)
         Tela_Administrador_Adicionar_Medico adicionar = new Tela_Administrador_Adicionar_Medico();

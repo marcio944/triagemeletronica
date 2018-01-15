@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import triagemeletronica.modelos.Enfermeiro;
+import triagemeletronica.modelos.Validar;
 
 /**
  *
@@ -25,6 +27,7 @@ public class Tela_Administrador_Alterar_Enfermeiro extends javax.swing.JInternal
     PreparedStatement pst = null;
     PreparedStatement pst2 = null;
     ResultSet rs = null;
+    Enfermeiro enfermeiro = new Enfermeiro();
 
     /**
      * Creates new form Tela_Agenda_Adicionar
@@ -34,7 +37,7 @@ public class Tela_Administrador_Alterar_Enfermeiro extends javax.swing.JInternal
         conexao = Conexao.getConnection();
     }
         
-        private void alterar_endereco(){
+        public void alterar_endereco(Enfermeiro enfermeiro) throws Exception{
        
         String sql2 = "update Enfermeiro set Telefone_Fixo=?,Telefone_Celular=?,Endereco=? where id=?";
 
@@ -43,39 +46,56 @@ public class Tela_Administrador_Alterar_Enfermeiro extends javax.swing.JInternal
 
         if (confirma == JOptionPane.YES_OPTION) {
         
-        try {
-                        
-            pst2 = conexao.prepareStatement(sql2);
-            pst2.setString(1, txtTelFixEnf.getText());
-            pst2.setString(2, txtTelCelEnf1.getText());
-            pst2.setString(3, txtEndEnf.getText());
-            pst2.setString(4, txtNumIDEnf.getText());
-;        
-              if (txtNomeEnf.getText().isEmpty() || txtCorenEnf.getText().isEmpty() || txtEndEnf.getText().isEmpty() || txtTelCelEnf1.getText().isEmpty()) {
-
-                JOptionPane.showMessageDialog(null, "Preencha todos os Campos Obrigatorios");
-
-            }else{
-               int add2 = pst2.executeUpdate();
-
-                if (add2 > 0) {
-                    JOptionPane.showMessageDialog(null, "Alterado com Sucesso");
-                    
-                    txtNomeEnf.setText(null);
-                    txtCorenEnf.setText(null);
-                    txtSenhaEnf.setText(null);
-                    txtTelFixEnf.setText(null);
-                    txtTelCelEnf1.setText(null);
-                    txtEndEnf.setText(null);
-                    txtNumIDEnf.setText(null);
+            Validar validar = new Validar();
+            boolean nulos = validar.camposNulosEnfEnd(enfermeiro);
+            boolean fone10Digitos = validar.checkFone_FixoEnf10DigitosOuNulo(enfermeiro.getFone_fixo());
+            boolean celular11Digitos = validar.checkCelularEnf11Digitos(enfermeiro.getFone_celular());
+        
+            try {
+            
+                pst2 = conexao.prepareStatement(sql2);
+                pst2.setString(1, enfermeiro.getFone_fixo());
+                pst2.setString(2, enfermeiro.getFone_celular());
+                pst2.setString(3, enfermeiro.getEndereco()); 
+                pst2.setInt(4, enfermeiro.getId());
+            
+                if(nulos == true && fone10Digitos == true && celular11Digitos == true){
+                    pst2.executeUpdate();
+                    JOptionPane.showMessageDialog(null, "Dados do enfermeiro alterados com sucesso!"); 
+            
+                }else{
+                    throw new Exception("Erro ao alterar dados do enfermeiro!");
                 }
-             }
-
-        } catch (SQLException | HeadlessException e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
+            
+            
+            
+            } catch (SQLException | HeadlessException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }catch (Exception ex){
+                JOptionPane.showMessageDialog(null, ex);
+                throw ex;
+            }
+        
         }
     }
+        
+    public Enfermeiro buscaEndEnfermeiro(Enfermeiro enfermeiro){
+         String sql = "select * from Enfermeiro where id = ?";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setInt(1, enfermeiro.getId());
+            rs = pst.executeQuery();
+            if(rs.next()){
+                enfermeiro.setFone_fixo(rs.getString("TELEFONE_FIXO"));
+                enfermeiro.setFone_celular(rs.getString("TELEFONE_CELULAR"));
+                enfermeiro.setEndereco(rs.getString("ENDERECO"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Tela_Administrador_Adicionar_Medico.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+         return enfermeiro;
+     }
         
     private void pesquisar() {
 
@@ -328,7 +348,15 @@ public class Tela_Administrador_Alterar_Enfermeiro extends javax.swing.JInternal
     }//GEN-LAST:event_txtNomeEnfActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        alterar_endereco();
+        enfermeiro.setId(Integer.parseInt(txtNumIDEnf.getText()));
+        enfermeiro.setFone_fixo(txtTelFixEnf.getText());
+        enfermeiro.setFone_celular(txtTelCelEnf1.getText());
+        enfermeiro.setEndereco(txtEndEnf.getText());
+        try {
+            alterar_endereco(enfermeiro);
+        } catch (Exception ex) {
+            Logger.getLogger(Tela_Administrador_Alterar_Enfermeiro.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
