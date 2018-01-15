@@ -386,9 +386,12 @@ public Triagem() {
            
             if(rs.next()!=false){
                             
-                System.err.println(rs.getString("Id"));    
+              //  System.err.println(rs.getString("Id"));    
         jComboBoxRua.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jComboBoxRua.setModel(new javax.swing.DefaultComboBoxModel<>(Rua((String)rs.getString("Id"))));
+        jComboBoxBairro.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jComboBoxBairro.setModel(new javax.swing.DefaultComboBoxModel<>(Bairro((String)rs.getString("Id"))));
+        
             }
             
             
@@ -399,7 +402,10 @@ public Triagem() {
         });
           
          
-         
+        
+       
+        
+        
          
          
          
@@ -719,6 +725,30 @@ public static String [] Rua(String id) throws SQLException{
         
         return r; 
     }
+public static String [] Bairro(String id) throws SQLException{
+       String sql = "SELECT Nome FROM `bairro` WHERE municipio_Id='"+id+"';";
+       Conexao c = new Conexao();
+       Connection con = c.getConnection();
+       PreparedStatement stmt = con.prepareStatement(sql); 
+       ResultSet rs = stmt.executeQuery(sql);
+        
+       rs.last();
+       int totalOfRecords = rs.getRow();
+       rs.beforeFirst();
+       System.err.println(totalOfRecords);
+      String[] r = new  String[totalOfRecords+1];
+      int i =1;
+      r[0]= "Selecione o Bairro!";
+       while (rs.next()) {            
+                r[i] = rs.getString("Nome");
+                i++;
+
+        }
+        
+        return r; 
+    }
+    
+
 
 
 
