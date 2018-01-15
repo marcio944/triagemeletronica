@@ -13,14 +13,6 @@ public class Paciente {
     private String nome;
     private String rua;
     private int numero;
-
-    public int getNumero() {
-        return numero;
-    }
-
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
     private String bairro;
     private String cidade;
     private String cep;
@@ -38,7 +30,35 @@ public class Paciente {
     private boolean alergia;
     private String resultado_alergia;
     private int cor; 
+    private int diarreia; 
+    private int vomito; 
 
+    public int getDiarreia() {
+        return diarreia;
+    }
+
+    public void setDiarreia(int diarreia) {
+        this.diarreia = diarreia;
+    }
+
+    public int getVomito() {
+        return vomito;
+    }
+
+    public void setVomito(int vomito) {
+        this.vomito = vomito;
+    }
+  
+    
+    
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+    
     public int getCor() {
         return cor;
     }
