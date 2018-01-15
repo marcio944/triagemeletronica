@@ -231,13 +231,13 @@ public Triagem() {
         jTextFieldProcedencia.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         jComboBoxProcedencia.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jComboBoxProcedencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {  }));
+        jComboBoxProcedencia.setModel(new javax.swing.DefaultComboBoxModel<>(Procedencia()));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("Motivo da Vinda:");
 
         jComboBoxMotivoDaVienda.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jComboBoxMotivoDaVienda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { }));
+        jComboBoxMotivoDaVienda.setModel(new javax.swing.DefaultComboBoxModel<>(motivo_da_vinda()));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Temperatura:");
@@ -292,11 +292,14 @@ public Triagem() {
         jTFNome.setText(rs.getString("nome"));
         jTFCEP.setText(rs.getString("cep"));
         jTFRG.setText(rs.getString("rg"));
+        
         jTextFieldNumero.setText(rs.getString("numero"));
         
-          
+        jTextFieldRua.setText(Rua_has_bairro(rs.getString("rua_has_bairro_id"), 1));
+        jTFBairro.setText(Rua_has_bairro(rs.getString("rua_has_bairro_id"), 0));
         jComboBoxEstado.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         
+       
        
         
         
@@ -677,6 +680,59 @@ public Triagem() {
         return r; 
     }
 
+ 
+ public static String [] Procedencia() throws SQLException{
+       String sql = "SELECT Procedencia FROM `procedencia`;";
+       Conexao c = new Conexao();
+       Connection con = c.getConnection();
+       PreparedStatement stmt = con.prepareStatement(sql); 
+       ResultSet rs = stmt.executeQuery(sql);
+       
+       rs.last();
+       int totalOfRecords = rs.getRow();
+       rs.beforeFirst();
+      // System.err.println(totalOfRecords);
+      String[] r = new  String[totalOfRecords+1]; 
+      r[0] = "Selecione a Procedencia ou Informe ao Lado!"; 
+      int i =1;
+        while (rs.next()) {            
+                r[i] = rs.getString("Procedencia");
+                i++;
+
+        }
+        
+        return r; 
+    }
+ 
+ 
+ 
+ public static String [] motivo_da_vinda() throws SQLException{
+       String sql = "SELECT motivo_da_vinda FROM `motivo_da_vinda`;";
+       Conexao c = new Conexao();
+       Connection con = c.getConnection();
+       PreparedStatement stmt = con.prepareStatement(sql); 
+       ResultSet rs = stmt.executeQuery(sql);
+       
+       rs.last();
+       int totalOfRecords = rs.getRow();
+       rs.beforeFirst();
+      // System.err.println(totalOfRecords);
+      String[] r = new  String[totalOfRecords+1]; 
+      r[0] = "Selecione a Procedencia ou Informe ao Lado!"; 
+      int i =1;
+        while (rs.next()) {            
+                r[i] = rs.getString("motivo_da_vinda");
+                i++;
+
+        }
+        
+        return r; 
+    }
+ 
+
+
+
+ 
 public static String [] Cidade(String uf) throws SQLException{
     String sql = "SELECT Nome FROM `municipio` WHERE Uf='"+uf+"'; ";
     Conexao c = new Conexao();
@@ -699,6 +755,92 @@ public static String [] Cidade(String uf) throws SQLException{
         return r; 
     
 }
+
+
+
+
+
+
+public static String rua(String id) throws SQLException{
+    String sql = "SELECT Nome FROM `rua` WHERE id='"+id+"';";
+       Conexao c = new Conexao();
+       Connection con = c.getConnection();
+       PreparedStatement stmt = con.prepareStatement(sql); 
+       ResultSet rs = stmt.executeQuery(sql);
+      
+      int i =1;
+      String r = null;
+       while (rs.next()) {            
+                r = rs.getString("Nome");
+                i++;
+
+        }
+        
+        return r;
+}
+
+
+
+
+public static String bairro(String id) throws SQLException{
+    String sql = "SELECT Nome FROM `bairro` WHERE id='"+id+"';";
+       Conexao c = new Conexao();
+       Connection con = c.getConnection();
+       PreparedStatement stmt = con.prepareStatement(sql); 
+       ResultSet rs = stmt.executeQuery(sql);
+      
+      int i =1;
+      String r = null;
+       while (rs.next()) {            
+                r = rs.getString("Nome");
+                i++;
+
+        }
+        
+        return r;
+}
+
+
+
+
+
+public static String Rua_has_bairro(String id, int e) throws SQLException{
+       if(e==1){
+       String sql = "SELECT id_rua FROM `rua_has_bairro` WHERE id='"+id+"';";
+       Conexao c = new Conexao();
+       Connection con = c.getConnection();
+       PreparedStatement stmt = con.prepareStatement(sql); 
+       ResultSet rs = stmt.executeQuery(sql);
+      
+      int i =1;
+      String r = null;
+       while (rs.next()) {            
+                r = rs.getString("id_rua");
+                i++;
+
+        }
+        
+        return rua(r);
+       }else{
+         
+           
+       String sql = "SELECT id_bairro FROM `rua_has_bairro` WHERE id='"+id+"';";
+       Conexao c = new Conexao();
+       Connection con = c.getConnection();
+       PreparedStatement stmt = con.prepareStatement(sql); 
+       ResultSet rs = stmt.executeQuery(sql);
+        
+      int i =1;
+      String r = null;
+       while (rs.next()) {            
+                r = rs.getString("id_bairro");
+                i++;
+
+        }
+        
+        return rua(r);
+       }
+    }
 
 
 
