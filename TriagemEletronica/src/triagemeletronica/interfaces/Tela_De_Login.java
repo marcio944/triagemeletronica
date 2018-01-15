@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import triagemeletronica.interfaces.Tela_Do_Administrador;
 import triagemeletronica.interfaces.Tela_Do_Administrador;
+import triagemeletronica.interfaces.enfermeiro.Tela_Do_Enfermeiro;
 
 /**
  *
@@ -55,12 +56,12 @@ public class Tela_De_Login extends javax.swing.JFrame {
                     Tela_Do_Administrador.txtNumID.setText(rs.getString(1)); 
                 }
                 else if(perfil.equalsIgnoreCase("Enfermeiro")){
-//                     Tela_Do_Enfermeiro te = new Tela_Do_Enfermeiro();
-  //                   te.setVisible(true);
-    //                 this.dispose();
+                    Tela_Do_Enfermeiro te = new Tela_Do_Enfermeiro();
+                     te.setVisible(true);
+                     this.dispose();
                 
-      //               Tela_Do_Enfermeiro.lblUsuario.setText(rs.getString(2));
-        //             Tela_Do_Administrador.txtNumID.setText(rs.getString(1));
+                     Tela_Do_Enfermeiro.lblUsuario.setText(rs.getString(2));
+                     Tela_Do_Enfermeiro.txtNumID.setText(rs.getString(1));
                 }else{
                 
       //          Tela_Do_Medico tm = new Tela_Do_Medico();
