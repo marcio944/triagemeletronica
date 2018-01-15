@@ -509,6 +509,32 @@ public class TesteCadastro {
         adicionarEnf.adicionar_endereco(enfermeiro);
         
     }
+    
+    @Test(expected = Exception.class)
+    public void testeEndereco_Nulo() throws Exception{
+        
+        Tela_Administrador_Adicionar_Medico adicionar = new Tela_Administrador_Adicionar_Medico();
+        Tela_Administrador_Adicionar_Enfermeiro adicionarEnf = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Medico medico = new Medico();
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        medico.setId(8);
+        medico.setFone_fixo("8934222433");
+        medico.setFone_celular("89999841001");
+        medico.setEndereco("");
+        
+        enfermeiro.setId(9);
+        enfermeiro.setFone_fixo("34222433");
+        enfermeiro.setFone_celular("89999841001");
+        enfermeiro.setEndereco("");
+        
+        adicionar.adicionar_endereco(medico);
+        adicionarEnf.adicionar_endereco(enfermeiro);
+        
+    }
+    
+    
 
 }
     
